@@ -13,13 +13,15 @@ public class User {
     private String googleId; // google sub
     @Indexed(unique = true)
     private String email;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private String pictureUrl;
 
-    public User(String googleId, String email, String fullName, String pictureUrl){
+    public User(String googleId, String email, String firstName, String lastName, String pictureUrl){
         this.googleId = googleId;
         this.email = email;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.pictureUrl = pictureUrl;
     }
 
@@ -47,19 +49,27 @@ public class User {
         this.email = email;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getPictureUrl() {
         return pictureUrl;
     }
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }

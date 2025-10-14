@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.nio.charset.StandardCharsets;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -23,11 +25,17 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests.anyRequest().authenticated())
-                .oauth2Login(oauth2 ->
-                        oauth2.successHandler((request, response, authentication) -> {
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler((request, response, authentication) -> {
                             String token = jwtService.generateToken(authentication);
-                            response.sendRedirect("http://localhost:5173/?token=" + token);
-                        }));
+                            response.sendRedirect("http://localhost:5173/login/callback?token=" + token);
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            String errorMessage = exception.getMessage();
+                            response.sendRedirect("http://localhost:5173/login/callback?error=" +
+                                    java.net.URLEncoder.encode(errorMessage, StandardCharsets.UTF_8));
+                        })
+                );
         return http.build();
     }
 }

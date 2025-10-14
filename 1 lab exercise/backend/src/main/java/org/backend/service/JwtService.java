@@ -24,16 +24,20 @@ public class JwtService {
     public String generateToken(Authentication authentication) {
         OAuth2User user = (OAuth2User) authentication.getPrincipal();
         String email = user.getAttribute("email");
-        String name = user.getAttribute("name");
+        String firstName = user.getAttribute("given_name");
+        String lastName = user.getAttribute("family_name");
         String sub = user.getAttribute("sub");
         String picture = user.getAttribute("picture");
 
         userRepository.findByGoogleId(sub)
-                .orElseGet(() -> userRepository.save(new User(sub, email, name, picture)));
+                .orElseGet(() -> userRepository.save(new User(sub, email, firstName, lastName, picture)));
 
         return Jwts.builder()
                 .setSubject(email)
-                .claim("name", name)
+                .claim("firstName", firstName)
+                .claim("lastName", lastName)
+                .claim("sub", sub)
+                .claim("picture", picture)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 hour
                 .signWith(key)

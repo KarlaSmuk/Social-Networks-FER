@@ -40,4 +40,4 @@
    cp .env.example .env
    ```
 
-2. **Add your API keys to `.env`**
+2. **Add your Google client id to `.env`**

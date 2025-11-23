@@ -2,7 +2,7 @@
 
 ## Data Sources
 
-- #### 1. **🎞️ Movie Information** - OMDb API
+ #### 1. **🎞️ Movie Information** - OMDb API
 - **URL:** [omdbapi.com](https://omdbapi.com)
 - **Purpose:** Get detailed movie information and metadata
 - **Data:** Movie titles, ratings, plot, cast, genres, posters

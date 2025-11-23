@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Key;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

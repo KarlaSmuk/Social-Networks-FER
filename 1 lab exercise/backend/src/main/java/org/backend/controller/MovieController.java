@@ -2,13 +2,11 @@ package org.backend.controller;
 
 import org.backend.model.Genre;
 import org.backend.model.Movie;
+import org.backend.model.Streaming;
 import org.backend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +24,14 @@ public class MovieController {
     }
 
     @GetMapping("/genres")
-    public ResponseEntity<List<Genre>> getGenres(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<List<Genre>> getGenres() {
         List<Genre> genres = movieService.getAllGenres();
         return ResponseEntity.ok(genres);
+    }
+
+    @GetMapping("/{movie_id}/streaming")
+    public ResponseEntity<List<Streaming>> getStreamingByMovieId(@PathVariable String movie_id) {
+        List<Streaming> streamings = movieService.getStreamingByMovieId(movie_id);
+        return ResponseEntity.ok(streamings);
     }
 }

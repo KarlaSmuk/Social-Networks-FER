@@ -2,6 +2,7 @@ package org.backend.service;
 
 import org.backend.model.Genre;
 import org.backend.model.Movie;
+import org.backend.model.Streaming;
 import org.backend.repository.GenreRepository;
 import org.backend.repository.MovieRepository;
 import org.backend.repository.StreamingRepository;
@@ -31,4 +32,7 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public List<Streaming> getStreamingByMovieId(String movieId) {
+        return streamingRepository.findByImdbID(movieId);
+    }
 }

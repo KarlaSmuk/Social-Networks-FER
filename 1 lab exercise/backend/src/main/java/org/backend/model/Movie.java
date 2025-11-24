@@ -13,7 +13,7 @@ import java.util.List;
 public class Movie {
 
     @Id
-    private String id;
+    private String _id;
 
     private String imdbID;
     private Long tmdb_id;

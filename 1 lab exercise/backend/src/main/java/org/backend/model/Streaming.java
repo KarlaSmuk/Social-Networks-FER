@@ -14,7 +14,7 @@ import java.util.Map;
 public class Streaming {
 
     @Id
-    private String id;
+    private String _id;
 
     private String imdbID;
 

@@ -1,5 +1,6 @@
 package org.backend.controller;
 
+import org.backend.model.Genre;
 import org.backend.model.Movie;
 import org.backend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class MovieController {
     }
 
     @GetMapping("/genres")
-    public ResponseEntity<?> getGenres(@RequestHeader("Authorization") String authHeader) {
-        List<String> genres = movieService.getAllGenres();
+    public ResponseEntity<List<Genre>> getGenres(@RequestHeader("Authorization") String authHeader) {
+        List<Genre> genres = movieService.getAllGenres();
         return ResponseEntity.ok(genres);
     }
 }

@@ -23,13 +23,8 @@ public class MovieService {
     @Autowired
     private StreamingRepository streamingRepository;
 
-    public List<String> getAllGenres() {
-        return genreRepository.findAll()
-                .stream()
-                .map(Genre::getName)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList());
+    public List<Genre> getAllGenres() {
+        return genreRepository.findAll();
     }
 
     public List<Movie> getAllMovies() {

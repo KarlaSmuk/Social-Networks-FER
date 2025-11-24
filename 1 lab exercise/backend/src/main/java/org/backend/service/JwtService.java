@@ -34,6 +34,14 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    public Claims parseClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
     public String generateToken(Authentication authentication) {
         OAuth2User user = (OAuth2User) authentication.getPrincipal();
         String email = user.getAttribute("email");
@@ -69,11 +77,7 @@ public class JwtService {
             String token = authHeader.substring(7);
 
             // Parse and verify the JWT token
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+            Claims claims = parseClaims(token);
 
             // Token is valid → return claims if you want
             return ResponseEntity.ok().body(Map.of(

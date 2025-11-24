@@ -19,8 +19,9 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    public ResponseEntity<Movie> fetchAll(@RequestHeader("Google-Id") String googleId) {
-        return null;
+    public ResponseEntity<List<Movie>> fetchAll() {
+        List<Movie> movies = movieService.getAllMovies();
+        return ResponseEntity.ok(movies);
     }
 
     @GetMapping("/genres")

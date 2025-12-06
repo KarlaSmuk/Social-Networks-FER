@@ -108,7 +108,7 @@ function Dashboard() {
                 id={movie.imdbID}
                 className="border p-2 rounded shadow grid justify-center"
               >
-                <img className="h-100 w-auto" src={movie.poster} />
+                <img className="h-100 w-auto justify-self-center" src={movie.poster} />
                 <h2 className="font-semibold mt-2">{movie.title}</h2>
                 <p>Genres: {movie.genre}</p>
                 <p>Country: {movie.country}</p>

@@ -3,7 +3,6 @@ package org.backend.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.backend.model.User;
@@ -66,20 +65,17 @@ public class JwtService {
                 .compact();
     }
 
-    // Verify JWT token
     public ResponseEntity<?> verifyToken(String authHeader) {
         try {
-            // Extract token from "Bearer <token>"
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 return ResponseEntity.badRequest().body(Map.of("valid", false, "error", "Missing or invalid Authorization header"));
             }
 
             String token = authHeader.substring(7);
 
-            // Parse and verify the JWT token
+            // Parse and verify token
             Claims claims = parseClaims(token);
 
-            // Token is valid → return claims if you want
             return ResponseEntity.ok().body(Map.of(
                     "valid", true,
                     "sub", claims.getSubject(),

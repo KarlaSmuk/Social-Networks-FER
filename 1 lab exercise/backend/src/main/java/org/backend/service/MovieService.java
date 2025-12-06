@@ -46,7 +46,6 @@ public class MovieService {
                 })
                 .filter(m -> {
                     String genre = m.getGenre() != null ? m.getGenre() : "";
-                    System.out.println(genres);
                     return genres == null || genres.stream().anyMatch(genre::contains);
                 })
                 .collect(Collectors.toList());

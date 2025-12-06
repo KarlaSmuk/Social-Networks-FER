@@ -37,27 +37,19 @@ public class MovieService {
     }
 
     public List<Movie> searchMovies(String query, List<String> genres) {
-        List<Movie> allMovies = movieRepository.findAll();
+        List<Movie> movies;
 
-        return allMovies.stream()
-                .filter(m -> {
-                    String title = m.getTitle() != null ? m.getTitle() : "";
-                    return query == null || title.toLowerCase().contains(query.toLowerCase());
-                })
+        if(query != null) {
+            movies = movieRepository.findByTitleContainsIgnoreCase(query.toLowerCase());
+        } else {
+            movies = movieRepository.findAll();
+        }
+
+        return movies.stream()
                 .filter(m -> {
                     String genre = m.getGenre() != null ? m.getGenre() : "";
                     return genres == null || genres.stream().anyMatch(genre::contains);
                 })
                 .collect(Collectors.toList());
-
     }
-
-    private boolean movieMatchesGenres(Movie movie, List<String> genres) {
-        if (movie.getGenre() == null) return false;
-
-        String movieGenres = movie.getGenre().toLowerCase();
-
-        return genres.stream().anyMatch(g -> movieGenres.contains(g.toLowerCase()));
-    }
-
 }

@@ -35,4 +35,30 @@ public class MovieService {
     public List<Streaming> getStreamingByMovieId(String movieId) {
         return streamingRepository.findByImdbID(movieId);
     }
+
+    public List<Movie> searchMovies(String query, List<String> genres) {
+        List<Movie> allMovies = movieRepository.findAll();
+
+        return allMovies.stream()
+                .filter(m -> {
+                    String title = m.getTitle() != null ? m.getTitle() : "";
+                    return query == null || title.toLowerCase().contains(query.toLowerCase());
+                })
+                .filter(m -> {
+                    String genre = m.getGenre() != null ? m.getGenre() : "";
+                    System.out.println(genres);
+                    return genres == null || genres.stream().anyMatch(genre::contains);
+                })
+                .collect(Collectors.toList());
+
+    }
+
+    private boolean movieMatchesGenres(Movie movie, List<String> genres) {
+        if (movie.getGenre() == null) return false;
+
+        String movieGenres = movie.getGenre().toLowerCase();
+
+        return genres.stream().anyMatch(g -> movieGenres.contains(g.toLowerCase()));
+    }
+
 }

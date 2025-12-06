@@ -34,4 +34,14 @@ public class MovieController {
         List<Streaming> streamings = movieService.getStreamingByMovieId(movie_id);
         return ResponseEntity.ok(streamings);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Movie>> searchMovies(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) List<String> genres
+    ) {
+        List<Movie> movies = movieService.searchMovies(query, genres);
+        return ResponseEntity.ok(movies);
+    }
+
 }

@@ -94,3 +94,13 @@ export const fetchStreamingByMovieId = async (
     if (!res.ok) throw new Error("Failed to fetch streaming info");
     return res.json();
 };
+
+export async function searchMovies(token?: string, query?: string, genres?: string[]) {
+    const params = new URLSearchParams();
+
+    if (query) params.append("query", query);
+    if (genres) genres.forEach(g => params.append("genres", g));
+
+    const res = await fetch(`${API_BASE}/search?` + params.toString(), { headers: getHeaders(token) });
+    return res.json();
+}

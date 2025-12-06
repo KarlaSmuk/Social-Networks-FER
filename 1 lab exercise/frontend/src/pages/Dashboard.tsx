@@ -7,8 +7,10 @@ import {
   type Genre,
 } from "../hooks/api";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [genres, setGenres] = useState<Genre[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const { token } = useAuth();
@@ -47,6 +49,8 @@ function Dashboard() {
         : [...prev, genre]
     );
   };
+
+  if (!filteredMovies) return <p className="p-4">Loading...</p>;
 
   return (
     <div className="p-4">
@@ -106,9 +110,15 @@ function Dashboard() {
               <div
                 key={movie.imdbID}
                 id={movie.imdbID}
-                className="border p-2 rounded shadow grid justify-center"
+                className="border p-2 rounded shadow grid justify-center cursor-pointer"
+                onClick={() =>
+                  navigate(`/movies/${movie.imdbID}`, { state: { movie } })
+                }
               >
-                <img className="h-100 w-auto justify-self-center" src={movie.poster} />
+                <img
+                  className="h-100 w-auto justify-self-center"
+                  src={movie.poster}
+                />
                 <h2 className="font-semibold mt-2">{movie.title}</h2>
                 <p>Genres: {movie.genre}</p>
                 <p>Country: {movie.country}</p>

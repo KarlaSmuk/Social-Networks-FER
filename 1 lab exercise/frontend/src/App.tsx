@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import LoginCallback from "./pages/LoginCallback";
 import { AuthProvider } from "./context/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
+import StreamingDetailPage from "./pages/StreamingPage";
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/movies/:id"
+            element={
+              <ProtectedRoute>
+                <StreamingDetailPage />
               </ProtectedRoute>
             }
           />

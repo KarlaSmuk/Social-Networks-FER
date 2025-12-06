@@ -31,7 +31,13 @@ def fetch_omdb(imdb_id):
     }
 
     response = requests.get("http://www.omdbapi.com/", params=params)
-    return response.json()
+    data = response.json()
+
+    if data.get("Response") == "False":
+        print(f"Error for IMDb ID {imdb_id}: {data.get('Error')}")
+        return None
+
+    return data
 
 def save_movie(movie):
     collection.update_one(
@@ -56,8 +62,10 @@ def import_all_movies():
             print(f"  Fetching OMDb: {m.get("title")} ({imdb_id})")
 
             omdb = fetch_omdb(imdb_id)
+            if omdb is None:
+                print(f"Movie with TMDB ID {tmdb_id} skipped")
+                continue
             omdb["tmdb_id"] = tmdb_id
-
             save_movie(omdb)
 
     print("Finished importing!")

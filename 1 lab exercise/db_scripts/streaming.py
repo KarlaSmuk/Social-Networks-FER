@@ -54,8 +54,6 @@ def update_streaming_options():
                 upsert=True
             )
 
-        time.sleep(0.3)  # 300ms delay
-
 if __name__ == "__main__":
     update_streaming_options()
     print("Done fetching streaming platforms!")

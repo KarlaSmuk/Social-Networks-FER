@@ -28,9 +28,8 @@ function Dashboard() {
   const handleSearch = (e?: React.FormEvent) => {
     if (!token) return;
     if (e) e.preventDefault();
-    console.log(query);
-    const genreNames = selectedGenres.map((g) => g.name);
-    searchMovies(token, query, genreNames).then(setFilteredMovies);
+    const genres = selectedGenres.map((g) => g.id);
+    searchMovies(token, query, genres).then(setFilteredMovies);
   };
 
   const loadMovies = async (token: string) => {

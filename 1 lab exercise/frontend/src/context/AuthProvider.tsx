@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoading, setIsLoading] = useState(false); // Loading state for initialization
   const signRef = useRef(false);
   const navigate = useNavigate();
+  
   // Initialize auth state from localStorage on app start
   useEffect(() => {
     if (!signRef.current) initializeAuth();

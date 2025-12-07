@@ -14,7 +14,7 @@ function Dashboard() {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
-  const { token } = useAuth();
+  const { token, signOut } = useAuth();
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
   const [query, setQuery] = useState("");
 
@@ -55,6 +55,12 @@ function Dashboard() {
 
   return (
     <div className="p-4">
+      <button
+        onClick={signOut}
+        className="px-3 py-1.5 mb-4 rounded-md border border-[#ccc] bg-black text-white cursor-pointer"
+      >
+        Sign Out
+      </button>
       <h1 className="text-2xl font-bold mb-4">Movies Dashboard</h1>
 
       {movies.length === 0 ? (
@@ -89,16 +95,14 @@ function Dashboard() {
                 <button
                   key={g.id}
                   onClick={() => toggleGenre(g)}
-                  style={{
-                    padding: "6px 12px",
-                    borderRadius: "6px",
-                    border: "1px solid #ccc",
-                    background: selectedGenres.includes(g)
-                      ? "#007bff"
-                      : "white",
-                    color: selectedGenres.includes(g) ? "white" : "black",
-                    cursor: "pointer",
-                  }}
+                  className={`
+                    px-3 py-1.5 rounded-md border cursor-pointer
+                    ${
+                      selectedGenres.includes(g)
+                        ? "text-blue-500 border-blue-500"
+                        : "text-gray-500 border-blue-500"
+                    }
+                  `}
                 >
                   {g.name}
                 </button>

@@ -7,7 +7,6 @@ function Login() {
 
   return (
     <div>
-      <h2>Welcome to the App</h2>
       <GoogleButton type="dark" onClick={googleLogin} />
     </div>
   );

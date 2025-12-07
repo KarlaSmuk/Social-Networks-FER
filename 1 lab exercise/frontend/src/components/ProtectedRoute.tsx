@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 interface ProtectedRouteProps {
@@ -8,11 +8,10 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { isAuthenticated, isLoading } = useAuth();
-  const location = useLocation();
 
-  // If not authenticated, redirect to login with return path
+  // If not authenticated, redirect to login
   if (!isAuthenticated && !isLoading) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/login" />;
   }
 
   // User is authenticated, render the protected component

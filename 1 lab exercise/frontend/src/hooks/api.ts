@@ -25,7 +25,7 @@ export interface Movie {
     country?: string;
     dvd?: string;
     director?: string;
-    genre?: string; // or string[] if you split genres
+    genre?: string;
     language?: string;
     metascore?: string;
     plot?: string;

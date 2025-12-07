@@ -11,7 +11,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserData | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false); // Loading state for initialization
+  const [isLoading, setIsLoading] = useState(false); 
   const signRef = useRef(false);
   const navigate = useNavigate();
   

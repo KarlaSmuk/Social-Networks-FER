@@ -47,8 +47,8 @@ public class MovieService {
 
         return movies.stream()
                 .filter(m -> {
-                    String genre = m.getGenre() != null ? m.getGenre().toLowerCase() : "";
-                    return genres == null || genres.stream().map(g -> g.equalsIgnoreCase("scifi") ? "sci-fi" : g).anyMatch(genre::contains);
+                    String genre = m.getGenre() != null ? m.getGenre().toLowerCase().replace("-", "") : "";
+                    return genres == null || genres.stream().anyMatch(genre::contains);
                 })
                 .collect(Collectors.toList());
     }

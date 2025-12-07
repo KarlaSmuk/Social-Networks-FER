@@ -120,7 +120,7 @@ function Dashboard() {
                   }
                 >
                   <img
-                    className="h-100 w-auto justify-self-center"
+                    className="h-100 w-auto object-contain justify-self-center"
                     src={movie.poster}
                   />
                   <h2 className="font-semibold mt-2">{movie.title}</h2>

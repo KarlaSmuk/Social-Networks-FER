@@ -28,13 +28,13 @@ const StreamingDetailPage = () => {
   return (
     <div className="p-6 max-w-3xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">{movie.title}</h1>
-      <div className="flex gap-5">
+      <div className="flex flex-wrap gap-5 justify-center">
         <img
-          className="h-100 w-auto justify-self-center mb-5"
+          className="h-100 w-auto object-contain justify-self-center mb-5"
           src={movie.poster}
         />
         <div>
-          <div>
+          <div className="mt-8">
             <div className="mb-2">
               <strong>Genres:</strong> {movie.genre}
             </div>
